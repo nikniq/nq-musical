@@ -47,3 +47,20 @@ a { color: inherit; }
 .kb .hl { fill: #ffd34d !important; } .kb .key.correct { fill: #7ee2a8 !important; } .kb .key.wrong { fill: #f59a9a !important; }
 .summary { text-align: center; padding: 20px 0; } .summary .big { font-size: 3rem; font-weight: 800; color: var(--primary); }
 .staff-note { fill: var(--text); } .staff-line { stroke: #444; stroke-width: 1.2; }
+.nav { margin-left: auto; display: flex; align-items: center; gap: 12px; font-size: .95rem; }
+.nav a { text-decoration: none; font-weight: 600; } .nav form { margin: 0; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; }
+.link-btn { background: none; border: 0; font: inherit; color: var(--primary); font-weight: 600; cursor: pointer; padding: 0; }
+.btn.small { min-height: 0; padding: 6px 14px; color: #fff; }
+.auth-card { max-width: 420px; margin: 24px auto; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; }
+.auth-card h1 { margin: 0 0 4px; }
+.form { display: flex; flex-direction: column; gap: 14px; margin-top: 8px; }
+.form label { display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: .92rem; }
+.form input[type=email], .form input[type=password], .form input[type=text] { font: inherit; padding: 10px 12px; border: 2px solid var(--border); border-radius: 10px; }
+.form input:focus { outline: none; border-color: var(--primary); }
+.form .check { flex-direction: row; align-items: center; font-weight: 400; }
+.error { color: var(--bad); margin: -6px 0 0; font-size: .9rem; }
+.google-btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; text-decoration: none; margin-top: 16px; }
+.divider { display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: .85rem; margin: 16px 0 4px; }
+.divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+.center { text-align: center; margin-top: 18px; }
