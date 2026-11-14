@@ -7,17 +7,33 @@
 #   ./cx.sh 31 "migrate:status"   # …with a parameter
 #
 # Runs on your machine only. Its counterpart on the server is deploy.sh.
-# Needs vars.sh next to it (copy vars.sh.example). vars.sh is gitignored.
+# Settings live in the block below; any of them can be overridden from
+# the environment for one run, e.g.  REMOTE_HOST=staging.example.com ./cx.sh 30
 #================================================================
 
 cd "$(dirname "$0")" || exit 1
 
-if [ ! -f ./vars.sh ]; then
-  echo "vars.sh not found — copy vars.sh.example to vars.sh and fill it in."
-  exit 1
-fi
-# shellcheck source=vars.sh.example
-source ./vars.sh
+#---------------------------------------------------------------
+# Settings — edit these for your server
+#---------------------------------------------------------------
+PROJECT="${PROJECT:-nq-musical}"                      # banners and backup names
+REMOTE_USER="${REMOTE_USER:-your-ssh-user}"
+REMOTE_HOST="${REMOTE_HOST:-your-host.example.com}"
+REMOTE_PORT="${REMOTE_PORT:-18765}"                   # SiteGround SSH is not on 22
+REMOTE_APP="${REMOTE_APP:-www/your-domain.com}"       # app root on the server, relative to ~
+APP_URL="${APP_URL:-https://your-domain.com}"         # public URL for health checks
+REPO_URL="${REPO_URL:-https://github.com/nikniq/nq-musical.git}"
+REMOTE="$REMOTE_USER@$REMOTE_HOST"
+APP_SSH="${APP_SSH:-ssh -p $REMOTE_PORT}"
+APP_SCP="${APP_SCP:-scp -P $REMOTE_PORT}"
+
+case "${1:-}" in
+  10|qq|"") ;;  # local-only options and the menu work without a server
+  *) if [ "$REMOTE_HOST" = "your-host.example.com" ]; then
+       echo "Set REMOTE_USER, REMOTE_HOST, REMOTE_APP and APP_URL at the top of cx.sh first."
+       exit 1
+     fi ;;
+esac
 
 BACKUP_DIR="${BACKUP_DIR:-./backups}"
 LOG_DIR="${LOG_DIR:-./log}"
